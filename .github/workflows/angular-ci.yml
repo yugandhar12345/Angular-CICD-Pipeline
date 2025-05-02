@@ -1,3 +1,40 @@
+# name: Angular CI
+
+# on:
+#   push:
+#     branches: [main]
+#   pull_request:
+#     branches: [main]
+
+# jobs:
+#   build-and-test:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#     - name: Checkout repository
+#       uses: actions/checkout@v3
+
+#     - name: Setup Node.js
+#       uses: actions/setup-node@v3
+#       with:
+#         node-version: 18
+
+#     - name: Install dependencies
+#       run: npm install
+
+#     - name: Build Angular project
+#       run: npm run build -- --configuration=production
+
+
+#     - name: Run unit tests with coverage
+#       run: npm run test -- --watch=false --browsers=ChromeHeadless --code-coverage
+
+#     - name: Upload coverage report
+#       uses: actions/upload-artifact@v4
+#       with:
+#         name: coverage-report
+#         path: coverage/**/index.html
+
 name: Angular CI
 
 on:
@@ -25,6 +62,11 @@ jobs:
     - name: Build Angular project
       run: npm run build -- --configuration=production
 
+    - name: Upload build artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: angular-build
+        path: dist/
 
     - name: Run unit tests with coverage
       run: npm run test -- --watch=false --browsers=ChromeHeadless --code-coverage
@@ -34,3 +76,4 @@ jobs:
       with:
         name: coverage-report
         path: coverage/**/index.html
+
