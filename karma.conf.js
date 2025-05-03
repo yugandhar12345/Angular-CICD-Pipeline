@@ -16,11 +16,11 @@ module.exports = function (config) {
     },
     coverageReporter: {
       dir: require('path').join(__dirname, './coverage'),
-      subdir: 'my-angular-project',
+      subdir: '.',
       reporters: [
         { type: 'html' }, // Generates HTML report
         { type: 'text-summary' }, // Outputs a summary to the console
-        { type: 'lcovonly', subdir: 'my-angular-project', file: 'lcov-report.lcov' } // Generates LCOV report
+        { type: 'lcovonly', file: 'lcov.info' } // Generates LCOV report
       ]
     },
     reporters: ['progress', 'kjhtml'],
