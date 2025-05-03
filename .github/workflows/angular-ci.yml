@@ -125,7 +125,7 @@ jobs:
             -Dsonar.tests=src \
             -Dsonar.test.inclusions=**/*.spec.ts \
             -Dsonar.exclusions=**/*.spec.ts \
-            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info \
+            -Dsonar.javascript.lcov.reportPaths=coverage/my-angular-project/lcov.info \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.login=$SONAR_TOKEN
 
