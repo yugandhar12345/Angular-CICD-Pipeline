@@ -1,3 +1,4 @@
+
 name: Angular CI
 
 on:
@@ -26,6 +27,12 @@ jobs:
 
       - name: Build Angular project
         run: npm run build -- --configuration=production
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: angular-build
+          path: dist/
 
       - name: Run unit tests with coverage
         run: npm run test -- --watch=false --browsers=ChromeHeadless --code-coverage
@@ -61,7 +68,7 @@ jobs:
           path: coverage
 
       - name: List coverage contents
-        run: ls -R coverage  # This will help debug and ensure coverage report exists
+        run: ls -R coverage
 
       - name: Install SonarScanner CLI
         run: npm install -g sonarqube-scanner
@@ -77,6 +84,6 @@ jobs:
             -Dsonar.tests=src \
             -Dsonar.test.inclusions=**/*.spec.ts \
             -Dsonar.exclusions=**/*.spec.ts \
-            -Dsonar.javascript.lcov.reportPaths=coverage/lcov-report.lcov \  # Ensure this is correct
+            -Dsonar.javascript.lcov.reportPaths=coverage/my-angular-project/lcov.info \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.login=$SONAR_TOKEN
