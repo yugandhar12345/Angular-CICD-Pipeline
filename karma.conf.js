@@ -20,8 +20,8 @@ module.exports = function (config) {
       reporters: [
         { type: 'html' }, // Generates HTML report
         { type: 'text-summary' }, // Outputs a summary to the console
-        { type: 'lcovonly', file: 'lcov-report/lcov-info' }
-        { type: 'cobertura', file: 'cobertura.xml' } // Generates LCOV report
+        { type: 'lcovonly', file: 'lcov-report/lcov.info' }, // LCOV for SonarQube
+        { type: 'cobertura', file: 'cobertura.xml' } // Cobertura XML for SonarQube
       ]
     },
     reporters: ['progress', 'kjhtml', 'coverage'],
