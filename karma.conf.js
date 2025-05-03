@@ -20,7 +20,7 @@ module.exports = function (config) {
       reporters: [
         { type: 'html' }, // Generates HTML report
         { type: 'text-summary' }, // Outputs a summary to the console
-        { type: 'lcovonly', subdir: '.', file: 'lcov-report.lcov' } // Generates LCOV report
+        { type: 'lcovonly', subdir: 'my-angular-project', file: 'lcov-report.lcov' } // Generates LCOV report
       ]
     },
     reporters: ['progress', 'kjhtml'],
