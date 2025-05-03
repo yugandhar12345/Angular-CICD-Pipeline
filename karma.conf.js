@@ -16,7 +16,7 @@ module.exports = function (config) {
     },
     coverageReporter: {
       dir: require('path').join(__dirname, './coverage'),
-      subdir: '.',
+      subdir: 'my-angular-project',
       reporters: [
         { type: 'html' }, // Generates HTML report
         { type: 'text-summary' }, // Outputs a summary to the console
