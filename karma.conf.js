@@ -12,15 +12,15 @@ module.exports = function (config) {
     ],
     client: {
       jasmine: {},
-      clearContext: false 
+      clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
     coverageReporter: {
       dir: require('path').join(__dirname, './coverage'),
       subdir: '.',
       reporters: [
-        { type: 'html' },
-        { type: 'text-summary' },
-        { type: 'lcovonly' } 
+        { type: 'html' }, // Generates the HTML coverage report
+        { type: 'text-summary' }, // Outputs a summary to the console
+        { type: 'lcovonly', subdir: '.', file: 'lcov-info' } // Generates LCOV report for SonarCloud
       ]
     },
     reporters: ['progress', 'kjhtml'],
