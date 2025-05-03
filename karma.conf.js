@@ -18,9 +18,9 @@ module.exports = function (config) {
       dir: require('path').join(__dirname, './coverage'),
       subdir: '.',
       reporters: [
-        { type: 'html' }, // Generates the HTML coverage report
+        { type: 'html' }, // Generates HTML report
         { type: 'text-summary' }, // Outputs a summary to the console
-        { type: 'lcovonly', subdir: '.', file: 'lcov-info' } // Generates LCOV report for SonarCloud
+        { type: 'lcovonly', subdir: '.', file: 'lcov-report.lcov' } // Generates LCOV report in `lcov-report.lcov`
       ]
     },
     reporters: ['progress', 'kjhtml'],
