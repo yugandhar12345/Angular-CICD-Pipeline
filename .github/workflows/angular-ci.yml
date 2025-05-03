@@ -25,6 +25,11 @@
 #     - name: Build Angular project
 #       run: npm run build -- --configuration=production
 
+#     - name: Upload build artifact
+#       uses: actions/upload-artifact@v4
+#       with:
+#         name: angular-build
+#         path: dist/
 
 #     - name: Run unit tests with coverage
 #       run: npm run test -- --watch=false --browsers=ChromeHeadless --code-coverage
@@ -48,32 +53,77 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Required for accurate blame/issue tracking
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: 18
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Build Angular project
-      run: npm run build -- --configuration=production
+      - name: Build Angular project
+        run: npm run build -- --configuration=production
 
-    - name: Upload build artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: angular-build
-        path: dist/
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: angular-build
+          path: dist/
 
-    - name: Run unit tests with coverage
-      run: npm run test -- --watch=false --browsers=ChromeHeadless --code-coverage
+      - name: Run unit tests with coverage
+        run: npm run test -- --watch=false --browsers=ChromeHeadless --code-coverage
 
-    - name: Upload coverage report
-      uses: actions/upload-artifact@v4
-      with:
-        name: coverage-report
-        path: coverage/**/index.html
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage
+
+  sonar-scan:
+    runs-on: ubuntu-latest
+    needs: build-and-test
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Download coverage report
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage
+
+      - name: List coverage contents
+        run: ls -R coverage
+
+      - name: Install SonarScanner CLI
+        run: npm install -g sonarqube-scanner
+
+      - name: Run SonarScanner
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          sonar-scanner \
+            -Dsonar.projectKey=my-angular-project \
+            -Dsonar.organization=my-org-key \
+            -Dsonar.sources=src \
+            -Dsonar.tests=src \
+            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info \
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.login=$SONAR_TOKEN
 
