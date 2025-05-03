@@ -20,7 +20,7 @@ module.exports = function (config) {
       reporters: [
         { type: 'html' }, // Generates HTML report
         { type: 'text-summary' }, // Outputs a summary to the console
-        { type: 'lcovonly', file: 'lcov.info' } // Generates LCOV report
+        { type: 'lcovonly', file: 'lcov-report/lcov-info' } // Generates LCOV report
       ]
     },
     reporters: ['progress', 'kjhtml', 'coverage'],
