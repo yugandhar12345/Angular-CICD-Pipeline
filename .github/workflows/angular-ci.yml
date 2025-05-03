@@ -119,8 +119,8 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           sonar-scanner \
-            -Dsonar.projectKey=my-angular-project \
-            -Dsonar.organization=my-org-key \
+            -Dsonar.projectKey=shaik-byte_Angular-CICD-Pipeline \
+            -Dsonar.organization=shaik-byte \
             -Dsonar.sources=src \
             -Dsonar.tests=src \
             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info \
