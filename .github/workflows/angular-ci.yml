@@ -78,8 +78,8 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           sonar-scanner \
-            -Dsonar.projectKey=shaik-byte_Angular-CICD-Pipeline \
-            -Dsonar.organization=yugandhar12345 \
+            -Dsonar.projectKey=yugandar_Angular-CICD-Pipeline \
+            -Dsonar.organization=yugandar \
             -Dsonar.sources=src \
             -Dsonar.tests=src \
             -Dsonar.test.inclusions=**/*.spec.ts \
