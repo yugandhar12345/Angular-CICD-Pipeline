@@ -87,4 +87,4 @@ jobs:
             -Dsonar.javascript.lcov.reportPaths=coverage/my-angular-project/lcov.info \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.login=$SONAR_TOKEN
-            -Dsonar.branch.name=main 
+            
